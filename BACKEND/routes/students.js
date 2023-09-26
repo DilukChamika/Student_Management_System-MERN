@@ -39,7 +39,7 @@ router.route("/update/:id").put(async(req,res)=>{
         gender
     }
     const update = await Student.findByIdAndUpdate(userId,updateStudent).then(()=>{
-        res.status(200).send({status:"user updated" , user: update})
+        res.status(200).send({status:"user updated"})
     }).catch((err)=>{
         console.log(err);
         res.status(500).send({status:"Error with updating data"});
@@ -63,8 +63,8 @@ router.route("/delete/:id").delete(async(req,res)=>{
 
 router.route("/get/:id").get(async(req,res) =>{
     let userId = req.params.id;
-    const user = await Student.findById(userId).then(()=>{
-        res.status(200).send({status: "User fetched", user:user})
+    const user = await Student.findById(userId).then((student)=>{
+        res.status(200).send({status: "User fetched", student})
     }).catch(()=>{
         console.log(err.message);
         res.status(500).send({status: "Error with fetching", error:err.message});
